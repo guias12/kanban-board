@@ -1,0 +1,24 @@
+.App {
+  background: rgb(76, 158, 8);
+  background: linear-gradient(
+    219deg,
+    rgba(76, 158, 8, 1) 0%,
+    rgba(66, 186, 25, 1) 58%,
+    rgba(36, 200, 23, 1) 100%
+  );
+  width: 100vw;
+  height: 100vh;
+}
+
+.app-title {
+  color: white;
+  font-size: 2em;
+  margin: 0;
+  padding: 15px;
+}
+
+.app-board-list {
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+}
