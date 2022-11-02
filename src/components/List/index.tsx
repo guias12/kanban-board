@@ -4,14 +4,16 @@ import { ICard } from "../../models/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./styles.scoped.scss";
-
+import { connect } from "react-redux";
+import { addCard } from "../../actions";
 interface IListProps {
   title: string;
   id: number;
   cards: ICard[];
+  dispatch: any;
 }
 
-const List = ({ title, id, cards }: IListProps) => {
+const List = ({ title, id, cards, dispatch }: IListProps) => {
   const [creatingCard, setCreatingCard] = useState(false);
   const [newCardText, setNewCardText] = useState("");
 
@@ -22,11 +24,19 @@ const List = ({ title, id, cards }: IListProps) => {
       setNewCardText("");
     }
   };
+
+  const handleAddCard = () => {
+    if (newCardText) {
+      dispatch(addCard(newCardText, id));
+    }
+    setCreatingCard(false);
+    setNewCardText("");
+  };
   return (
     <div className="list-container">
       <h3>{title}</h3>
       {cards.map((card) => (
-        <Card card={card} id={card.id} key={card.id} />
+        <Card card={card} listId={id} id={card.id} key={card.id} />
       ))}
       {creatingCard ? (
         <div className="new-card-container">
@@ -41,7 +51,9 @@ const List = ({ title, id, cards }: IListProps) => {
             autoFocus
           />
           <div className="new-card-buttons">
-            <button className="add-card-btn">Add card</button>
+            <button className="add-card-btn" onClick={handleAddCard}>
+              Add card
+            </button>
             <button
               className="cancel-add-btn"
               onClick={() => toggleCardCreation(false)}
@@ -64,4 +76,4 @@ const List = ({ title, id, cards }: IListProps) => {
   );
 };
 
-export default List;
+export default connect()(List);

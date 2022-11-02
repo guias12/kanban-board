@@ -1,3 +1,4 @@
+@import "../styles/global.scss";
 .card-container {
   margin: 5px 0;
   background: #ffffff;
@@ -12,4 +13,43 @@
 
 .card-text {
   cursor: text;
+}
+
+.card-text-input {
+  width: 90%;
+  padding: 5px;
+  border: none;
+}
+
+.card-text-input:active,
+.card-text-input:focus {
+  border: none;
+  outline: none;
+}
+
+.card-input-container {
+  position: relative;
+}
+.card-input-container > svg {
+  cursor: pointer;
+  margin: 0 0.5px;
+  position: absolute;
+  top: 50%;
+}
+
+.save-icon {
+  color: var(--primary);
+  right: 30px;
+}
+
+.save-icon:hover {
+  color: var(--secondary);
+}
+
+.cancel-icon {
+  color: var(--danger);
+  right: 10px;
+}
+.cancel-icon:hover {
+  color: var(--danger-light);
 }
