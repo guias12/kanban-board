@@ -17,3 +17,22 @@ export const changeCardText = (
     payload: { text, cardId, listId },
   };
 };
+
+export const draggableSort = (
+  sourceListId: string,
+  destinationListId: string,
+  sourceCardIndex: number,
+  destinationCardIndex: number,
+  draggableId: string
+) => {
+  return {
+    type: CONSTANTS.DRAG_CARD,
+    payload: {
+      sourceListId,
+      destinationListId,
+      sourceCardIndex,
+      destinationCardIndex,
+      draggableId,
+    },
+  };
+};

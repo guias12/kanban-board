@@ -1,6 +1,7 @@
 import { IList } from "../models/types";
 import { AnyAction } from "redux";
 import { CONSTANTS } from "../actions";
+
 const initialState: IList[] = [
   {
     title: "To Do",
@@ -29,11 +30,11 @@ const initialState: IList[] = [
     id: 1,
     cards: [
       {
-        id: 0,
+        id: 4,
         text: "Wash dishes",
       },
       {
-        id: 1,
+        id: 5,
         text: "Clean room",
       },
     ],
@@ -43,27 +44,31 @@ const initialState: IList[] = [
     id: 2,
     cards: [
       {
-        id: 0,
+        id: 6,
         text: "Walk with the dog",
       },
       {
-        id: 1,
+        id: 7,
         text: "Eat meal",
       },
     ],
   },
 ];
+let nextAvailableCardId = 8
+
 
 const listReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case CONSTANTS.ADD_CARD:
       const newState = state.map((list) => {
         if (list.id === action.payload.listId) {
-          const newCardId = list.cards.length;
+          const newCardId = nextAvailableCardId;
           const newCard = {
             text: action.payload.text,
             id: newCardId,
           };
+          nextAvailableCardId +=1;
+
           return {
             ...list,
             cards: [...list.cards, newCard],
@@ -98,6 +103,26 @@ const listReducer = (state = initialState, action: AnyAction) => {
       }
 
       return state;
+    case CONSTANTS.DRAG_CARD:
+      const {
+        sourceListId,
+        destinationListId,
+        sourceCardIndex,
+        destinationCardIndex,
+        draggableId,
+      } = action.payload
+      const stateCopy = [...state]
+      
+      if (sourceListId === destinationListId) {
+        const list = state.find(list => sourceListId === String(list.id))
+        const card = list?.cards.splice(sourceCardIndex, 1)
+
+        if (card) {
+          list?.cards.splice(destinationCardIndex, 0, ...card)
+        }
+      }
+
+      return stateCopy
     default:
       return state;
   }

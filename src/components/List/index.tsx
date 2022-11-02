@@ -3,6 +3,7 @@ import Card from "../Card";
 import { ICard } from "../../models/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { Droppable } from "react-beautiful-dnd";
 import "./styles.scoped.scss";
 import { connect } from "react-redux";
 import { addCard } from "../../actions";
@@ -33,46 +34,61 @@ const List = ({ title, id, cards, dispatch }: IListProps) => {
     setNewCardText("");
   };
   return (
-    <div className="list-container">
-      <h3>{title}</h3>
-      {cards.map((card) => (
-        <Card card={card} listId={id} id={card.id} key={card.id} />
-      ))}
-      {creatingCard ? (
-        <div className="new-card-container">
-          <input
-            type="text"
-            name="new-card-text"
-            id="new-card-text"
-            className="new-card-text"
-            placeholder="Add new card text"
-            value={newCardText}
-            onChange={(e) => setNewCardText(e.target.value)}
-            autoFocus
-          />
-          <div className="new-card-buttons">
-            <button className="add-card-btn" onClick={handleAddCard}>
-              Add card
-            </button>
-            <button
-              className="cancel-add-btn"
-              onClick={() => toggleCardCreation(false)}
-            >
-              <FontAwesomeIcon icon={faTimes} />
-            </button>
-          </div>
-        </div>
-      ) : (
-        <button
-          className="list-add-card-btn"
-          type="button"
-          onClick={() => toggleCardCreation(true)}
+    <Droppable droppableId={`${id}`}>
+      {(provided) => (
+        <div
+          {...provided.droppableProps}
+          ref={provided.innerRef}
+          className="list-container"
         >
-          <FontAwesomeIcon icon={faPlus} />
-          Create new card
-        </button>
+          <h3>{title}</h3>
+          {cards.map((card, index) => (
+            <Card
+              card={card}
+              listId={id}
+              id={card.id}
+              key={card.id}
+              index={index}
+            />
+          ))}
+          {creatingCard ? (
+            <div className="new-card-container">
+              <input
+                type="text"
+                name="new-card-text"
+                id="new-card-text"
+                className="new-card-text"
+                placeholder="Add new card text"
+                value={newCardText}
+                onChange={(e) => setNewCardText(e.target.value)}
+                autoFocus
+              />
+              <div className="new-card-buttons">
+                <button className="add-card-btn" onClick={handleAddCard}>
+                  Add card
+                </button>
+                <button
+                  className="cancel-add-btn"
+                  onClick={() => toggleCardCreation(false)}
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              className="list-add-card-btn"
+              type="button"
+              onClick={() => toggleCardCreation(true)}
+            >
+              <FontAwesomeIcon icon={faPlus} />
+              Create new card
+            </button>
+          )}
+          {provided.placeholder}
+        </div>
       )}
-    </div>
+    </Droppable>
   );
 };
 
