@@ -1,73 +1,47 @@
-import { IList } from "../models/types";
-import { AnyAction } from "redux";
-import { CONSTANTS } from "../actions";
+import { IInitialState } from '../models/types';
+import { AnyAction } from 'redux';
+import { CONSTANTS } from '../actions';
 
-const initialState: IList[] = [
-  {
-    title: "To Do",
-    id: 0,
-    cards: [
-      {
-        id: 0,
-        text: "lorem ipsum",
-      },
-      {
-        id: 1,
-        text: "lorem ipsum dolor",
-      },
-      {
-        id: 2,
-        text: "abc",
-      },
-      {
-        id: 3,
-        text: "def",
-      },
-    ],
-  },
-  {
-    title: "Doing",
-    id: 1,
-    cards: [
-      {
-        id: 4,
-        text: "Wash dishes",
-      },
-      {
-        id: 5,
-        text: "Clean room",
-      },
-    ],
-  },
-  {
-    title: "Done",
-    id: 2,
-    cards: [
-      {
-        id: 6,
-        text: "Walk with the dog",
-      },
-      {
-        id: 7,
-        text: "Eat meal",
-      },
-    ],
-  },
-];
-let nextAvailableCardId = 8
-
+const initialState: IInitialState = {
+  searchTerm: '',
+  list: [
+    {
+      title: 'To Do',
+      id: 0,
+      cards: [
+        {
+          id: 0,
+          text: 'Test kanban board',
+        },
+      ],
+    },
+    {
+      title: 'Doing',
+      id: 1,
+      cards: [],
+    },
+    {
+      title: 'Done',
+      id: 2,
+      cards: [],
+    },
+  ],
+};
+let nextAvailableCardId = 1;
 
 const listReducer = (state = initialState, action: AnyAction) => {
+  const stateClone: IInitialState = { ...state };
+
   switch (action.type) {
     case CONSTANTS.ADD_CARD:
-      const newState = state.map((list) => {
+      const newStateList = stateClone.list.map((list) => {
         if (list.id === action.payload.listId) {
           const newCardId = nextAvailableCardId;
           const newCard = {
             text: action.payload.text,
             id: newCardId,
           };
-          nextAvailableCardId +=1;
+          nextAvailableCardId += 1;
 
           return {
             ...list,
@@ -77,29 +51,33 @@ const listReducer = (state = initialState, action: AnyAction) => {
           return list;
         }
       });
-      return newState;
+
+      stateClone.list = newStateList;
+      state.list = newStateList;
+      return stateClone;
     case CONSTANTS.CHANGE_CARD_TEXT:
-      let currentList = state.find(
-        (list) => list.id === action.payload.listId
-      );
-      const currentListIndex = state.findIndex(
-        (list) => list.id === action.payload.listId
+      const { listId, cardId, text } = action.payload;
+      let currentList = stateClone.list.find((list) => list.id === listId);
+      const currentListIndex = stateClone.list.findIndex(
+        (list) => list.id === listId
       );
       const edditingCardIndex = currentList?.cards.findIndex(
-        card => card.id === action.payload.cardId
-      )
+        (card) => card.id === cardId
+      );
 
-      if (edditingCardIndex && currentList) {
-        let newCards = [...currentList.cards]
-        newCards[edditingCardIndex].text = action.payload.text
+      if (
+        (edditingCardIndex || edditingCardIndex === 0) &&
+        (currentList || currentList === 0)
+      ) {
+        let newCards = [...currentList.cards];
+        newCards[edditingCardIndex].text = text;
         currentList = {
           ...currentList,
-          cards: [...newCards]
-        }
+          cards: [...newCards],
+        };
 
-        const newState = state;
-        newState[currentListIndex] = currentList
-        return  newState
+        stateClone.list[currentListIndex] = currentList;
+        return stateClone;
       }
 
       return state;
@@ -109,20 +87,36 @@ const listReducer = (state = initialState, action: AnyAction) => {
         destinationListId,
         sourceCardIndex,
         destinationCardIndex,
-        draggableId,
-      } = action.payload
-      const stateCopy = [...state]
-      
+      } = action.payload;
+
       if (sourceListId === destinationListId) {
-        const list = state.find(list => sourceListId === String(list.id))
-        const card = list?.cards.splice(sourceCardIndex, 1)
+        const list = stateClone.list.find(
+          (list) => sourceListId === String(list.id)
+        );
+        const card = list?.cards.splice(sourceCardIndex, 1);
 
         if (card) {
-          list?.cards.splice(destinationCardIndex, 0, ...card)
+          list?.cards.splice(destinationCardIndex, 0, ...card);
+        }
+      } else {
+        const sourceList = stateClone.list.find(
+          (list) => sourceListId === String(list.id)
+        );
+        const card = sourceList?.cards.splice(sourceCardIndex, 1);
+        const destinationList = stateClone.list.find(
+          (list) => destinationListId === String(list.id)
+        );
+        if (card) {
+          destinationList?.cards.splice(destinationCardIndex, 0, ...card);
         }
       }
 
-      return stateCopy
+      return stateClone;
+    case CONSTANTS.FILTER_CARD:
+      const { searchTerm } = action.payload;
+      stateClone.searchTerm = searchTerm;
+
+      return stateClone;
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import { CONSTANTS } from ".";
+import { CONSTANTS } from '.';
 
 export const addCard = (text: string, listId: number) => {
   return {
@@ -33,6 +33,15 @@ export const draggableSort = (
       sourceCardIndex,
       destinationCardIndex,
       draggableId,
+    },
+  };
+};
+
+export const searchCard = (searchTerm: string) => {
+  return {
+    type: CONSTANTS.FILTER_CARD,
+    payload: {
+      searchTerm,
     },
   };
 };

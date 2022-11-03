@@ -8,3 +8,8 @@ export interface IList {
   id: number;
   cards: ICard[];
 }
+
+export interface IInitialState {
+  searchTerm: string;
+  list: IList[];
+}

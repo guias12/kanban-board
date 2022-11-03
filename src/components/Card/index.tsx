@@ -1,11 +1,11 @@
-import React, { useState, KeyboardEvent } from "react";
-import { connect } from "react-redux";
-import { changeCardText } from "../../actions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { ICard } from "../../models/types";
-import "./styles.scoped.scss";
-import { Draggable } from "react-beautiful-dnd";
+import React, { useState, KeyboardEvent } from 'react';
+import { connect } from 'react-redux';
+import { changeCardText } from '../../actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { ICard } from '../../models/types';
+import './styles.scoped.scss';
+import { Draggable } from 'react-beautiful-dnd';
 
 interface ICardProps {
   card: ICard;
@@ -23,7 +23,7 @@ const Card = ({ card, id, index, listId, dispatch }: ICardProps) => {
   };
 
   const handleInputKeydow = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       saveNewCardText();
     }
   };
