@@ -10,14 +10,6 @@ const getInitialState = (): IInitialState => ({
           id: 0,
           text: 'Test kanban board',
         },
-        {
-          id: 1,
-          text: 'alksdajlksdj',
-        },
-        {
-          id: 2,
-          text: 'xdddd',
-        },
       ],
     },
     {

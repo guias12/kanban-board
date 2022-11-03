@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import getInitialState from '../store/initialState';
 
-let nextAvailableCardId = 3;
+let nextAvailableCardId = 1;
 
 const listSlice = createSlice({
   name: 'list',
