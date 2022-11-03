@@ -1,6 +1,17 @@
-import { createStore } from 'redux';
-import { reducer as rootReducer } from '../reducers';
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import listReducer from '../reducers/listSlice';
 
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: {
+    list: listReducer,
+  },
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export default store;

@@ -1,20 +1,20 @@
 import React, { useState, KeyboardEvent } from 'react';
-import { connect } from 'react-redux';
-import { changeCardText } from '../../actions';
+import { changeCardText } from '../../reducers/listSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ICard } from '../../models/types';
 import './styles.scoped.scss';
 import { Draggable } from 'react-beautiful-dnd';
+import { useDispatch } from 'react-redux';
 
 interface ICardProps {
   card: ICard;
   id: number;
   index: number;
   listId: number;
-  dispatch: any;
 }
-const Card = ({ card, id, index, listId, dispatch }: ICardProps) => {
+const Card = ({ card, id, index, listId }: ICardProps) => {
+  const dispatch = useDispatch();
   const [cardText, setCardText] = useState<string>(card.text);
   const [isEdittingCard, setIsEdditingCard] = useState<boolean>(false);
 
@@ -31,7 +31,13 @@ const Card = ({ card, id, index, listId, dispatch }: ICardProps) => {
   const saveNewCardText = (): void => {
     setIsEdditingCard(false);
     if (cardText) {
-      dispatch(changeCardText(cardText, id, listId));
+      dispatch(
+        changeCardText({
+          listId: listId,
+          text: cardText,
+          cardId: id,
+        })
+      );
     }
   };
 
@@ -80,4 +86,4 @@ const Card = ({ card, id, index, listId, dispatch }: ICardProps) => {
   );
 };
 
-export default connect()(Card);
+export default Card;

@@ -1,42 +1,40 @@
 import React, { useState, ChangeEvent } from 'react';
 import List from '../List';
-import { IInitialState, IList } from '../../models/types';
-import { IState } from '../../reducers';
-import { connect } from 'react-redux';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { draggableSort, searchCard } from '../../actions';
-
+import { useAppSelector } from '../../store';
+import { dragCard, filterCard } from '../../reducers/listSlice';
+import { selectState } from '../../reducers/listSlice';
+import { useDispatch } from 'react-redux';
 import './styles.scoped.scss';
 
-interface IAppProps {
-  lists: IList[];
-  searchTerm: string;
-  dispatch: any;
-}
-
-function App({ lists, searchTerm, dispatch }: IAppProps) {
+function App() {
+  const dispatch = useDispatch();
+  const state = useAppSelector(selectState);
   const [searchInput, setSearchInput] = useState<string>('');
   const handleDragEnd = (result: DropResult) => {
-    const { destination, source, draggableId } = result;
+    const { destination, source } = result;
 
     if (!destination) {
       return;
     }
 
     dispatch(
-      draggableSort(
-        source.droppableId,
-        destination.droppableId,
-        source.index,
-        destination.index,
-        draggableId
-      )
+      dragCard({
+        sourceListId: source.droppableId,
+        destinationListId: destination.droppableId,
+        sourceCardIndex: source.index,
+        destinationCardIndex: destination.index,
+      })
     );
   };
 
   const onChangeFilterInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setSearchInput(event.target.value);
-    dispatch(searchCard(event.target.value));
+    dispatch(
+      filterCard({
+        searchTerm: event.target.value,
+      })
+    );
   };
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
@@ -54,12 +52,12 @@ function App({ lists, searchTerm, dispatch }: IAppProps) {
           />
         </div>
         <div className="app-board-list">
-          {lists.map((list) => {
+          {state.list.list.map((list) => {
             return (
               <List
                 title={list.title}
                 cards={list.cards}
-                searchTerm={searchTerm}
+                searchTerm={state.list.searchTerm}
                 id={list.id}
                 key={list.id}
               />
@@ -71,8 +69,4 @@ function App({ lists, searchTerm, dispatch }: IAppProps) {
   );
 }
 
-const mapStateToProps = (state: IState) => ({
-  lists: (state.lists as IInitialState).list,
-  searchTerm: (state.lists as IInitialState).searchTerm,
-});
-export default connect(mapStateToProps)(App);
+export default App;

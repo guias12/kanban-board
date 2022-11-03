@@ -4,18 +4,18 @@ import { ICard } from '../../models/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Droppable } from 'react-beautiful-dnd';
+import { useDispatch } from 'react-redux';
+import { addCard } from '../../reducers/listSlice';
 import './styles.scoped.scss';
-import { connect } from 'react-redux';
-import { addCard } from '../../actions';
 interface IListProps {
   title: string;
   id: number;
   cards: ICard[];
   searchTerm: string;
-  dispatch: any;
 }
 
-const List = ({ title, id, cards, searchTerm, dispatch }: IListProps) => {
+const List = ({ title, id, cards, searchTerm }: IListProps) => {
+  const dispatch = useDispatch();
   const [creatingCard, setCreatingCard] = useState(false);
   const [newCardText, setNewCardText] = useState('');
 
@@ -29,7 +29,12 @@ const List = ({ title, id, cards, searchTerm, dispatch }: IListProps) => {
 
   const handleAddCard = () => {
     if (newCardText) {
-      dispatch(addCard(newCardText, id));
+      dispatch(
+        addCard({
+          text: newCardText,
+          listId: id,
+        })
+      );
     }
     setCreatingCard(false);
     setNewCardText('');
@@ -111,4 +116,4 @@ const List = ({ title, id, cards, searchTerm, dispatch }: IListProps) => {
   );
 };
 
-export default connect()(List);
+export default List;
