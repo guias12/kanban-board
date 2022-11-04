@@ -93,14 +93,20 @@ const List = ({ title, id, cards, searchTerm }: IListProps) => {
                 onChange={(e) => setNewCardText(e.target.value)}
                 onKeyDown={handleInputKeyDown}
                 autoFocus
+                data-testid="list-create-input"
               />
               <div className="new-card-buttons">
-                <button className="add-card-btn" onClick={handleAddCard}>
+                <button
+                  className="add-card-btn"
+                  onClick={handleAddCard}
+                  data-testid="list-save-button"
+                >
                   Add card
                 </button>
                 <button
                   className="cancel-add-btn"
                   onClick={() => toggleCardCreation(false)}
+                  data-testid="list-cancel-button"
                 >
                   <FontAwesomeIcon icon={faTimes} />
                 </button>

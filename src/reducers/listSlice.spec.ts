@@ -1,5 +1,4 @@
 import reducer from './listSlice';
-import { IInitialState, ICard } from '../models/types';
 import {
   getInitialState,
   getEhancedTestInitialState,

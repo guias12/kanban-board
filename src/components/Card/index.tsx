@@ -63,20 +63,27 @@ const Card = ({ card, id, index, listId }: ICardProps) => {
                 onKeyDown={handleInputKeydow}
                 autoFocus
                 className="card-text-input"
+                data-testid="card-input"
               />
               <FontAwesomeIcon
                 onClick={saveNewCardText}
                 className="save-icon"
+                data-testid="card-input-save"
                 icon={faSave}
               />
               <FontAwesomeIcon
                 onClick={cancelEdittingMode}
                 className="cancel-icon"
+                data-testid="card-input-cancel"
                 icon={faTimes}
               />
             </div>
           ) : (
-            <span className="card-text" onClick={toggleIsEdditingCard}>
+            <span
+              className="card-text"
+              onClick={toggleIsEdditingCard}
+              data-testid="card-text"
+            >
               {card.text}
             </span>
           )}

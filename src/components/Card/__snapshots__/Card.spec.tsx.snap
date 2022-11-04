@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card component Should match Card snapshot 1`] = `
+<div
+  data-rbd-droppable-context-id="4"
+  data-rbd-droppable-id="0}"
+>
+  <div
+    aria-describedby="rbd-hidden-text-4-hidden-text-12"
+    className="card-container"
+    data-rbd-drag-handle-context-id="4"
+    data-rbd-drag-handle-draggable-id="0"
+    data-rbd-draggable-context-id="4"
+    data-rbd-draggable-id="0"
+    draggable={false}
+    onDragStart={[Function]}
+    onTransitionEnd={null}
+    role="button"
+    style={
+      Object {
+        "transform": null,
+        "transition": null,
+      }
+    }
+    tabIndex={0}
+  >
+    <span
+      className="card-text"
+      data-testid="card-text"
+      onClick={[Function]}
+    >
+      test card
+    </span>
+  </div>
+</div>
+`;

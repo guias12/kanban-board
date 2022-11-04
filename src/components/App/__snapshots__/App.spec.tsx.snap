@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component Should match App snapshot 1`] = `
+<div
+  className="App"
+>
+  <h2
+    className="app-title"
+  >
+    My Kanban Board
+  </h2>
+  <div
+    className="app-tools"
+  >
+    <input
+      className="search-card-input"
+      id="search-cards"
+      name="search-cards"
+      onChange={[Function]}
+      placeholder="Search card"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="app-board-list"
+  >
+    <div
+      className="list-container"
+      data-rbd-droppable-context-id="1"
+      data-rbd-droppable-id="0"
+    >
+      <h3>
+        To Do
+      </h3>
+      <div
+        aria-describedby="rbd-hidden-text-1-hidden-text-5"
+        className="card-container"
+        data-rbd-drag-handle-context-id="1"
+        data-rbd-drag-handle-draggable-id="0"
+        data-rbd-draggable-context-id="1"
+        data-rbd-draggable-id="0"
+        draggable={false}
+        onDragStart={[Function]}
+        onTransitionEnd={null}
+        role="button"
+        style={
+          Object {
+            "transform": null,
+            "transition": null,
+          }
+        }
+        tabIndex={0}
+      >
+        <span
+          className="card-text"
+          data-testid="card-text"
+          onClick={[Function]}
+        >
+          Test kanban board
+        </span>
+      </div>
+      <button
+        className="list-add-card-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-plus "
+          data-icon="plus"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+        Create new card
+      </button>
+    </div>
+    <div
+      className="list-container"
+      data-rbd-droppable-context-id="1"
+      data-rbd-droppable-id="1"
+    >
+      <h3>
+        Doing
+      </h3>
+      <button
+        className="list-add-card-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-plus "
+          data-icon="plus"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+        Create new card
+      </button>
+    </div>
+    <div
+      className="list-container"
+      data-rbd-droppable-context-id="1"
+      data-rbd-droppable-id="2"
+    >
+      <h3>
+        Done
+      </h3>
+      <button
+        className="list-add-card-btn"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          className="svg-inline--fa fa-plus "
+          data-icon="plus"
+          data-prefix="fas"
+          focusable="false"
+          role="img"
+          style={Object {}}
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+            fill="currentColor"
+            style={Object {}}
+          />
+        </svg>
+        Create new card
+      </button>
+    </div>
+  </div>
+</div>
+`;
