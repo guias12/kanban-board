@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 import Card from '../Card';
 import { ICard } from '../../models/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,7 +27,13 @@ const List = ({ title, id, cards, searchTerm }: IListProps) => {
     }
   };
 
-  const handleAddCard = () => {
+  const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key === 'Enter') {
+      handleAddCard();
+    }
+  };
+
+  const handleAddCard = (): void => {
     if (newCardText) {
       dispatch(
         addCard({
@@ -85,6 +91,7 @@ const List = ({ title, id, cards, searchTerm }: IListProps) => {
                 placeholder="Add new card text"
                 value={newCardText}
                 onChange={(e) => setNewCardText(e.target.value)}
+                onKeyDown={handleInputKeyDown}
                 autoFocus
               />
               <div className="new-card-buttons">

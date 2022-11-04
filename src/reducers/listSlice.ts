@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import getInitialState from '../store/initialState';
 
-let nextAvailableCardId = 1;
+let nextAvailableCardId = 15;
 
 const listSlice = createSlice({
   name: 'list',
@@ -13,7 +13,7 @@ const listSlice = createSlice({
       const currentListIndex = state.list.findIndex(
         (list) => list.id === listId
       );
-      if (currentListIndex) {
+      if (currentListIndex || currentListIndex === 0) {
         state.list[currentListIndex].cards.push({
           text: text,
           id: nextAvailableCardId,

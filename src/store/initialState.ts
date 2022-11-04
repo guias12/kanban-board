@@ -15,12 +15,38 @@ const getInitialState = (): IInitialState => ({
     {
       title: 'Doing',
       id: 1,
-      cards: [],
+      cards: [
+        {
+          id: 1,
+          text: 'Test kanban board',
+        },
+        {
+          id: 2,
+          text: 'Test kanban board',
+        },
+        {
+          id: 3,
+          text: 'Test kanban board',
+        },
+      ],
     },
     {
       title: 'Done',
       id: 2,
-      cards: [],
+      cards: [
+        {
+          id: 4,
+          text: 'Test kanban board',
+        },
+        {
+          id: 5,
+          text: 'Test kanban board',
+        },
+        {
+          id: 6,
+          text: 'Test kanban board',
+        },
+      ],
     },
   ],
 });
