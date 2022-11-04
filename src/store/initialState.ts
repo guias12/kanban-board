@@ -15,18 +15,48 @@ const getInitialState = (): IInitialState => ({
     {
       title: 'Doing',
       id: 1,
+      cards: [],
+    },
+    {
+      title: 'Done',
+      id: 2,
+      cards: [],
+    },
+  ],
+});
+
+const getEhancedTestInitialState = (): IInitialState => ({
+  searchTerm: '',
+  list: [
+    {
+      title: 'To Do',
+      id: 0,
       cards: [
         {
-          id: 1,
-          text: 'Test kanban board',
+          id: 0,
+          text: 'First ToDo card',
         },
         {
+          id: 1,
+          text: 'Second ToDo card',
+        },
+      ],
+    },
+    {
+      title: 'Doing',
+      id: 1,
+      cards: [
+        {
           id: 2,
-          text: 'Test kanban board',
+          text: 'first Doing card',
         },
         {
           id: 3,
-          text: 'Test kanban board',
+          text: 'second Doing card',
+        },
+        {
+          id: 4,
+          text: 'third Doing card',
         },
       ],
     },
@@ -35,20 +65,16 @@ const getInitialState = (): IInitialState => ({
       id: 2,
       cards: [
         {
-          id: 4,
-          text: 'Test kanban board',
-        },
-        {
           id: 5,
-          text: 'Test kanban board',
+          text: 'first Done card',
         },
         {
           id: 6,
-          text: 'Test kanban board',
+          text: 'second Done card',
         },
       ],
     },
   ],
 });
 
-export default getInitialState;
+export { getInitialState, getEhancedTestInitialState };

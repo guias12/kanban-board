@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import getInitialState from '../store/initialState';
+import { getInitialState } from '../store/initialState';
 
-let nextAvailableCardId = 15;
+let nextAvailableCardId = 1;
 
 const listSlice = createSlice({
   name: 'list',
@@ -23,7 +23,6 @@ const listSlice = createSlice({
     },
     changeCardText(state, action) {
       const { listId, cardId, text } = action.payload;
-      console.log({ listId, cardId, text });
       const currentListIndex = state.list.findIndex(
         (list) => list.id === listId
       );
@@ -34,7 +33,6 @@ const listSlice = createSlice({
         (currentCardIndex || currentCardIndex === 0) &&
         (currentListIndex || currentListIndex === 0)
       ) {
-        console.log(currentCardIndex, currentListIndex);
         state.list[currentListIndex].cards[currentCardIndex].text = text;
       }
     },
