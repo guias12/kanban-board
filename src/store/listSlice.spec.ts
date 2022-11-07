@@ -1,8 +1,5 @@
 import reducer from './listSlice';
-import {
-  getInitialState,
-  getEhancedTestInitialState,
-} from '../store/initialState';
+import { getInitialState, getEhancedTestInitialState } from './initialState';
 
 describe('List Reducers', () => {
   const initialState = () => {

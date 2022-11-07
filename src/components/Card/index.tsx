@@ -1,11 +1,13 @@
 import React, { useState, KeyboardEvent } from 'react';
-import { changeCardText } from '../../reducers/listSlice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { ICard } from '../../models/types';
-import './styles.scoped.scss';
 import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { changeCardText } from '../../store/listSlice';
+import { ICard } from '../../models/types';
+import { mappedKeys } from '../../util/mappedKeys';
+
+import './styles.scoped.scss';
 
 interface ICardProps {
   card: ICard;
@@ -18,12 +20,12 @@ const Card = ({ card, id, index, listId }: ICardProps) => {
   const [cardText, setCardText] = useState<string>(card.text);
   const [isEdittingCard, setIsEdditingCard] = useState<boolean>(false);
 
-  const toggleIsEdditingCard = (): void => {
+  const editCard = (): void => {
     setIsEdditingCard(true);
   };
 
-  const handleInputKeydow = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+  const handleInputKeydow = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key === mappedKeys.ENTER) {
       saveNewCardText();
     }
   };
@@ -81,7 +83,7 @@ const Card = ({ card, id, index, listId }: ICardProps) => {
           ) : (
             <span
               className="card-text"
-              onClick={toggleIsEdditingCard}
+              onClick={editCard}
               data-testid="card-text"
             >
               {card.text}

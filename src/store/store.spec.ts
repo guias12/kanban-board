@@ -1,7 +1,7 @@
 import { AnyAction, configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import { getInitialState } from './initialState';
 import { IInitialState } from '../models/types';
-import reducer from '../reducers/listSlice';
+import reducer from './listSlice';
 
 describe('Store', () => {
   const initialState = () => {

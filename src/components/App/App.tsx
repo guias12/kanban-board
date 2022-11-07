@@ -2,8 +2,8 @@ import React, { useState, ChangeEvent } from 'react';
 import List from '../List';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { useAppSelector } from '../../store';
-import { dragCard, filterCard } from '../../reducers/listSlice';
-import { selectState } from '../../reducers/listSlice';
+import { dragCard, filterCard } from '../../store/listSlice';
+import { selectState } from '../../store/listSlice';
 import { useDispatch } from 'react-redux';
 import './styles.scoped.scss';
 
@@ -11,7 +11,8 @@ function App() {
   const dispatch = useDispatch();
   const state = useAppSelector(selectState);
   const [searchInput, setSearchInput] = useState<string>('');
-  const handleDragEnd = (result: DropResult) => {
+
+  const handleDragEnd = (result: DropResult): void => {
     const { destination, source } = result;
 
     if (!destination) {

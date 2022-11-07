@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import listReducer from '../reducers/listSlice';
+import listReducer from './listSlice';
 
 const store = configureStore({
   reducer: {

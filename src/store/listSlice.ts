@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { getInitialState } from '../store/initialState';
+import { RootState } from '.';
+import { getInitialState } from './initialState';
 
 let nextAvailableCardId = 1;
 

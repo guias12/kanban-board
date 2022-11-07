@@ -1,0 +1,11 @@
+$primary: #4c9e08;
+$secondary: #5fb40f;
+$danger: #dc3545;
+$danger-light: #fa4e60;
+
+:export {
+  primary: $primary;
+  secondary: $secondary;
+  danger: $danger;
+  danger-light: $danger-light;
+}

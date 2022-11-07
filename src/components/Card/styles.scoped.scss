@@ -1,4 +1,4 @@
-@import '../../styles/global.scss';
+@import '../../styles/variables.module.scss';
 .card-container {
   margin: 5px 0;
   background: #ffffff;
@@ -38,18 +38,18 @@
 }
 
 .save-icon {
-  color: var(--primary);
+  color: $primary;
   right: 30px;
 }
 
 .save-icon:hover {
-  color: var(--secondary);
+  color: $secondary;
 }
 
 .cancel-icon {
-  color: var(--danger);
+  color: $danger;
   right: 10px;
 }
 .cancel-icon:hover {
-  color: var(--danger-light);
+  color: $danger-light;
 }

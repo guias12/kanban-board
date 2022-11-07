@@ -1,11 +1,13 @@
 import React, { useState, KeyboardEvent } from 'react';
-import Card from '../Card';
-import { ICard } from '../../models/types';
+import { useDispatch } from 'react-redux';
+import { Droppable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { Droppable } from 'react-beautiful-dnd';
-import { useDispatch } from 'react-redux';
-import { addCard } from '../../reducers/listSlice';
+import Card from '../Card';
+import { ICard } from '../../models/types';
+import { mappedKeys } from '../../util/mappedKeys';
+import { addCard } from '../../store/listSlice';
+
 import './styles.scoped.scss';
 interface IListProps {
   title: string;
@@ -19,6 +21,8 @@ const List = ({ title, id, cards, searchTerm }: IListProps) => {
   const [creatingCard, setCreatingCard] = useState(false);
   const [newCardText, setNewCardText] = useState('');
 
+  const isEmptySearchTerm = searchTerm === '';
+
   const toggleCardCreation = (status: boolean): void => {
     setCreatingCard(status);
 
@@ -28,7 +32,7 @@ const List = ({ title, id, cards, searchTerm }: IListProps) => {
   };
 
   const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
-    if (event.key === 'Enter') {
+    if (event.key === mappedKeys.ENTER) {
       handleAddCard();
     }
   };
@@ -42,9 +46,15 @@ const List = ({ title, id, cards, searchTerm }: IListProps) => {
         })
       );
     }
-    setCreatingCard(false);
-    setNewCardText('');
+    toggleCardCreation(false);
   };
+
+  const renderCard = (card: ICard, index: number): JSX.Element => {
+    return (
+      <Card card={card} listId={id} id={card.id} key={card.id} index={index} />
+    );
+  };
+
   return (
     <Droppable droppableId={`${id}`}>
       {(provided) => (
@@ -55,30 +65,14 @@ const List = ({ title, id, cards, searchTerm }: IListProps) => {
         >
           <h3>{title}</h3>
           {cards.map((card, index) => {
-            if (searchTerm !== '') {
+            if (isEmptySearchTerm) {
+              return renderCard(card, index);
+            } else {
               if (card.text.toLowerCase().includes(searchTerm.toLowerCase())) {
-                return (
-                  <Card
-                    card={card}
-                    listId={id}
-                    id={card.id}
-                    key={card.id}
-                    index={index}
-                  />
-                );
+                return renderCard(card, index);
               } else {
                 return null;
               }
-            } else {
-              return (
-                <Card
-                  card={card}
-                  listId={id}
-                  id={card.id}
-                  key={card.id}
-                  index={index}
-                />
-              );
             }
           })}
           {creatingCard ? (

@@ -1,4 +1,4 @@
-@import '../../styles/global.scss';
+@import '../../styles/variables.module.scss';
 .list-container {
   background: #ebecf0;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
@@ -22,7 +22,7 @@
   font-size: 1em;
   border: none;
   margin-top: 10px;
-  background: var(--primary);
+  background: $primary;
   transition: 0.2s;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .list-add-card-btn:hover {
-  background: var(--secondary);
+  background: $secondary;
 }
 
 .new-card-container {
@@ -67,17 +67,17 @@
 }
 
 .cancel-add-btn {
-  background: var(--danger);
+  background: $danger;
   padding: 8px 13px;
 }
 .cancel-add-btn:hover {
-  background: var(--danger-light);
+  background: $danger-light;
 }
 
 .add-card-btn {
-  background: var(--primary);
+  background: $primary;
   padding: 8px 10px;
 }
 .add-card-btn:hover {
-  background: var(--secondary);
+  background: $secondary;
 }
